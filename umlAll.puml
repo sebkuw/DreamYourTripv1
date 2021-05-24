@@ -1,0 +1,331 @@
+@startuml
+class com.example.travelasisstantv4.trip.Trip {
+- String docID
+- String name
+- String ownerID
+- String transportType
+- ArrayList<TripStop> tripStops
+- String description
+- double actualMoney
+- double costSum
++ {static} Creator<Trip> CREATOR
++ void writeToParcel(Parcel,int)
++ int describeContents()
++ String getDocID()
++ void setDocID(String)
++ String getName()
++ void setName(String)
++ String getOwnerID()
++ void setOwnerID(String)
++ String getTransportType()
++ void setTransportType(String)
++ ArrayList<TripStop> getTripStops()
++ void setTripStops(ArrayList<TripStop>)
++ void addTripStop(TripStop)
++ void deleteTripStop(TripStop)
++ String getDescription()
++ void setDescription(String)
++ double getActualMoney()
++ void setActualMoney(double)
++ double getCostSum()
++ void setCostSum(double)
++ String toString()
+}
+class com.example.travelasisstantv4.directions.FetchURL {
+~ Context mContext
+~ String directionMode
+# String doInBackground(String)
+# void onPostExecute(String)
+- String downloadUrl(String)
+}
+class com.example.travelasisstantv4.BuildConfig {
++ {static} boolean DEBUG
++ {static} String APPLICATION_ID
++ {static} String BUILD_TYPE
++ {static} int VERSION_CODE
++ {static} String VERSION_NAME
+}
+class com.example.travelasisstantv4.point.PointsActivity {
+- LinearLayout.LayoutParams params
+- LinearLayout.LayoutParams paramsHorizontal
+- LinearLayout.LayoutParams paramsButtons
+- FirebaseAuth mAuth
+- FirebaseFirestore db
+- FirebaseUser currentUser
+- ArrayList<Point> userPoints
+- ArrayList<Point> checkedPoints
+- LinearLayout llForPoints
+- Button btnShowOnMap
+# void onCreate(Bundle)
+- void initDB()
+- void initializeViews()
+- void getUserPoints()
++ void onClick(View)
++ void onDismiss(DialogInterface)
+}
+class com.example.travelasisstantv4.trip.AddTripDialogFragment {
+- FirebaseAuth mAuth
+- FirebaseFirestore db
+- ArrayList<String> transportTypes
+- EditText etTripName
+- Spinner spinnerTransportType
+- Button btnSaveTrip
++ {static} AddTripDialogFragment newInstance(String)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void initDB()
+- void initViews(View)
++ void onClick(View)
++ void onDismiss(DialogInterface)
+}
+class com.example.travelasisstantv4.trip.EditTripStopDialogFragment {
+- FirebaseAuth mAuth
+- FirebaseUser currentUser
+- FirebaseFirestore db
+- Trip t
+- TripStop ts
+- EditText etName
+- Button btnUpdate
++ {static} EditTripStopDialogFragment newInstance(String,Trip,TripStop)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void initDB()
+- void initViews(View)
++ void onClick(View)
++ void onDismiss(DialogInterface)
+}
+class com.example.travelasisstantv4.point.Point {
+- String docID
+- String name
+- double longitude
+- double latitude
+- String ownerID
++ {static} Creator<Point> CREATOR
++ String getDocID()
++ void setDocID(String)
++ String getName()
++ void setName(String)
++ double getLongitude()
++ void setLongitude(double)
++ double getLatitude()
++ void setLatitude(double)
++ String getOwnerID()
++ void setOwnerID(String)
++ String toString()
++ int describeContents()
++ void writeToParcel(Parcel,int)
+}
+class com.example.travelasisstantv4.activities.MapsActivity {
+- {static} int REQUEST_LOCATION_PERMISSION
+- {static} int REQUEST_TRIPS_ACTIVITY
+- int REQUEST_POINTS_ACTIVITY
+- GoogleMap mMap
+- FirebaseAuth mAuth
+- FirebaseFirestore db
+- FirebaseUser currentUser
+- ImageButton imgBtnCurrentPosition
+- FusedLocationProviderClient fusedLocationClient
+- AutocompleteSupportFragment autocompleteFragment
+- double longitude
+- String markerTitle
+- boolean isAnyTrip
+# void onCreate(Bundle)
+- void initViews()
+- void initMapAndPlaces()
+- void initDB()
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+# void onActivityResult(int,int,Intent)
+- String getUrl(LatLng,LatLng,String)
++ void onTaskDone(Object)
++ void onMapReady(GoogleMap)
+- void getCurrentLocation()
+- void moveMap()
++ void onMapLongClick(LatLng)
++ void onMarkerDragStart(Marker)
++ void onMarkerDrag(Marker)
++ void onMarkerDragEnd(Marker)
++ boolean onMarkerClick(Marker)
++ void onClick(View)
++ void onRequestPermissionsResult(int,String[],int[])
++ void requestLocationPermission()
+}
+class com.example.travelasisstantv4.directions.PointsParser {
+~ TaskLoadedCallback taskCallback
+~ String directionMode
+# List<List<HashMap<String,String>>> doInBackground(String)
+# void onPostExecute(List<List<HashMap<String,String>>>)
+}
+class com.example.travelasisstantv4.directions.DataParser {
++ List<List<HashMap<String,String>>> parse(JSONObject)
+- List<LatLng> decodePoly(String)
+}
+class com.example.travelasisstantv4.trip.TripStop {
+- String docID
+- String ownerID
+- String name
+- double longitude
+- double latitude
+- String description
+- double cost
+- int order
++ {static} Creator<TripStop> CREATOR
++ void writeToParcel(Parcel,int)
++ int describeContents()
++ String getDocID()
++ void setDocID(String)
++ String getOwnerID()
++ void setOwnerID(String)
++ String getName()
++ void setName(String)
++ double getLongitude()
++ void setLongitude(double)
++ double getLatitude()
++ void setLatitude(double)
++ String getDescription()
++ void setDescription(String)
++ double getCost()
++ void setCost(double)
++ int getOrder()
++ void setOrder(int)
++ String toString()
++ int compareTo(TripStop)
+}
+class com.example.travelasisstantv4.trip.EditTripActivity {
+- LinearLayout.LayoutParams params
+- LinearLayout.LayoutParams paramsHorizontal
+- LinearLayout.LayoutParams paramsButtons2
+- LinearLayout.LayoutParams paramsButtons3
+- FirebaseFirestore db
+- Trip t
+- ArrayList<String> transportTypes
+- EditText etTripName
+- Spinner spinnerTransportType
+- LinearLayout llForTripStops
+- Button btnUpdateTrip
+# void onCreate(Bundle)
+- void initDB()
+- void initViews()
+- void updateTripStops()
++ void onClick(View)
++ void onDismiss(DialogInterface)
+}
+class com.example.travelasisstantv4.UnitTests {
++ void addition_isCorrect()
+}
+class com.example.travelasisstantv4.point.RenamePointDialogFragment {
+- FirebaseFirestore db
+- EditText etRenamePoint
+- Button btnUpdateName
+- String pointID
++ {static} RenamePointDialogFragment newInstance(String,String)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void initializeViews(View)
+- void initDB()
++ void onClick(View)
++ void onDismiss(DialogInterface)
+}
+class com.example.travelasisstantv4.login.LoginActivity {
+- FirebaseAuth mAuth
+- EditText etEmail
+- ImageButton imgBtnShowPassword
+- TextView tvLoginError
+- Button btnSignIn
+- ProgressBar pbLoading
+# void onCreate(Bundle)
+- void initViews()
+~ void signIn(String,String)
+~ void createUser(String,String)
+- void sendVerificationEmail()
++ void onClick(View)
++ boolean onTouch(View,MotionEvent)
+}
+class com.example.travelasisstantv4.trip.TripsActivity {
+- {static} int REQUEST_EDIT_TRIP
+- LinearLayout.LayoutParams params
+- LinearLayout.LayoutParams paramsHorizontal
+- LinearLayout.LayoutParams paramsButtons2
+- FirebaseAuth mAuth
+- FirebaseFirestore db
+- FirebaseUser currentUser
+- ArrayList<Trip> userTrips
+- LinearLayout llForTrips
+- Button btnAddTrip
+# void onCreate(Bundle)
+- void initDB()
+- void initViews()
+- void getUserTrips()
++ void onClick(View)
++ void onDismiss(DialogInterface)
+# void onActivityResult(int,int,Intent)
+}
+class com.example.travelasisstantv4.point.AddPointDialogFragment {
+- FirebaseAuth mAuth
+- FirebaseFirestore db
+- double longitude
+- TextView tvLongitude
+- EditText etPointName
+- Button btnSave
++ {static} AddPointDialogFragment newInstance(String,double,double)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void initializeViews(View)
++ void onClick(View)
+}
+class com.example.travelasisstantv4.trip.AddTripStopDialogFragment {
+- FirebaseAuth mAuth
+- FirebaseUser currentUser
+- FirebaseFirestore db
+- double longitude
+- ArrayList<Trip> userTrips
+- ArrayList<String> userTripsString
+- Spinner spinnerTrips
+- EditText etName
+- Button btnAdd
++ {static} AddTripStopDialogFragment newInstance(String,double,double)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void initDB()
+- void initViews(View)
++ void getUserTrips()
++ void onClick(View)
+}
+
+
+android.os.Parcelable <|.. com.example.travelasisstantv4.trip.Trip
+android.os.AsyncTask <|-- com.example.travelasisstantv4.directions.FetchURL
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.point.PointsActivity
+com.example.travelasisstantv4.activities.OnDismissListener <|.. com.example.travelasisstantv4.point.PointsActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.travelasisstantv4.point.PointsActivity
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.trip.AddTripDialogFragment
+androidx.fragment.app.DialogFragment <|-- com.example.travelasisstantv4.trip.AddTripDialogFragment
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.trip.EditTripStopDialogFragment
+androidx.fragment.app.DialogFragment <|-- com.example.travelasisstantv4.trip.EditTripStopDialogFragment
+android.os.Parcelable <|.. com.example.travelasisstantv4.point.Point
+com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.travelasisstantv4.activities.MapsActivity
+com.example.travelasisstantv4.activities.OnMarkerDragListener <|.. com.example.travelasisstantv4.activities.MapsActivity
+com.example.travelasisstantv4.activities.OnMapLongClickListener <|.. com.example.travelasisstantv4.activities.MapsActivity
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.activities.MapsActivity
+com.example.travelasisstantv4.activities.OnMarkerClickListener <|.. com.example.travelasisstantv4.activities.MapsActivity
+com.example.travelasisstantv4.directions.TaskLoadedCallback <|.. com.example.travelasisstantv4.activities.MapsActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.travelasisstantv4.activities.MapsActivity
+android.os.AsyncTask <|-- com.example.travelasisstantv4.directions.PointsParser
+android.os.Parcelable <|.. com.example.travelasisstantv4.trip.TripStop
+com.example.travelasisstantv4.model.Comparable <|.. com.example.travelasisstantv4.trip.TripStop
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.trip.EditTripActivity
+com.example.travelasisstantv4.activities.OnDismissListener <|.. com.example.travelasisstantv4.trip.EditTripActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.travelasisstantv4.trip.EditTripActivity
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.point.RenamePointDialogFragment
+androidx.fragment.app.DialogFragment <|-- com.example.travelasisstantv4.point.RenamePointDialogFragment
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.login.LoginActivity
+com.example.travelasisstantv4.activities.OnTouchListener <|.. com.example.travelasisstantv4.login.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.travelasisstantv4.login.LoginActivity
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.trip.TripsActivity
+com.example.travelasisstantv4.activities.OnDismissListener <|.. com.example.travelasisstantv4.trip.TripsActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.travelasisstantv4.trip.TripsActivity
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.point.AddPointDialogFragment
+androidx.fragment.app.DialogFragment <|-- com.example.travelasisstantv4.point.AddPointDialogFragment
+com.example.travelasisstantv4.activities.OnClickListener <|.. com.example.travelasisstantv4.trip.AddTripStopDialogFragment
+androidx.fragment.app.DialogFragment <|-- com.example.travelasisstantv4.trip.AddTripStopDialogFragment
+@enduml

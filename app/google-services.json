@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "634856199028",
+    "firebase_url": "https://travel-assistant-v4.firebaseio.com",
+    "project_id": "travel-assistant-v4",
+    "storage_bucket": "travel-assistant-v4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634856199028:android:b84c85d426285bb17a5221",
+        "android_client_info": {
+          "package_name": "com.example.travelasisstantv4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634856199028-1di1ui4meu2tn51p9n6sb2rkoorrg85h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIaz1EmEye4fvD-v3wiAoJ-lN9fJ3nIsg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634856199028-1di1ui4meu2tn51p9n6sb2rkoorrg85h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+@startuml
+class ExampleInstrumentedTest {
+	+void useAppContext()
+}
+
+class DirectionParser {
+	+List<List<HashMap<String,String>>> parse(JSONObject)
+	-List<LatLng> decodePoly(String)
+}
+
+ExampleInstrumentedTest <|-- DirectionParser
+@enduml
